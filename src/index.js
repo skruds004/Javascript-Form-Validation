@@ -18,6 +18,7 @@ let validEmail = false;
 let validPassword = false;
 let validPasswordConfirmation = false;
 
+//change userPattern
 const userPattern = /^\w{4,}$/;
 const emailPattern = /^[a-zA-Z0-9._%+-]+@(?!.*example\.com)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const passwordTemplate = "(?!.*[pP][aA][sS]{2}[wW][oO][rR][dD])(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$&()\\-`.+,/\"]).{12,}$";
