@@ -1,9 +1,18 @@
+//variables used for the registration side of the page
 const register = document.querySelector('#registration');
 const username = document.querySelector('#username');
 const email = document.querySelector('#email');
 const password = document.querySelector('#password');
 const passwordConfirmation = document.querySelector('#passwordConfirmation');
 const checkbox = document.querySelector('#terms');
+
+//variables for the login side of the page
+const login = document.querySelector('#login');
+const userLogin = document.querySelector('#userLogin');
+const userPassword = document.querySelector('#userPassword');
+const persist = document.querySelector('#persist');
+
+//registration validation variables
 let validUser = false;
 let validEmail = false;
 let validPassword = false;
@@ -68,6 +77,8 @@ register.addEventListener('submit', function (event) {
     event.preventDefault();
     let errors = [];
     let hasError = false;
+
+    //Populate an array to be used as the error message
     if(!validUser) {
         errors.push("Username must be 4 or more characters long and contain no special characters or whitespace");
         hasError = true;
@@ -123,3 +134,29 @@ function addUser() {
     passwordConfirmation.value = "";
 }
 
+login.addEventListener('submit', function(event) {
+    event.preventDefault();
+    let existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+    let user = userLogin.value.toLowerCase();
+    let password = userPassword.value;
+    for (existingUser of existingUsers) {
+        if (existingUser.user === user) {
+            if(existingUser.password === password) {
+                if(persist.checked == true) {
+                    alert("You will remain logged in");
+                }
+                else {
+                    alert("Successfully logged in");
+                }
+            }
+            else {
+                alert("Wrong password");
+            }
+            userLogin.value = "";
+            userPassword.value = "";
+            return;
+        }
+    }
+    //code will run if user is not found in the for loop
+    alert("User not found");
+});
